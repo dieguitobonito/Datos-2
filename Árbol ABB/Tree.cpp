@@ -37,3 +37,29 @@ void Tree::traverseInOrder(TreeNode* node){
         traverseInOrder(node->right);
     }
 }
+
+void Tree::traversePreOrder(TreeNode* node){
+    if(node != nullptr){
+            std::cout << node->data.name
+                      << " ("
+                      << node->data.age
+                      << ", "
+                      << node->data.major
+                      << ")" << std::endl;
+            traversePreOrder(node->left);
+            traversePreOrder(node->right);
+    }
+}
+
+void Tree::traversePostOrder(TreeNode* node){
+       if(node != nullptr){
+               traversePostOrder(node->left);
+               traversePostOrder(node->right);
+               std::cout << node->data.name
+                         << " ("
+                         << node->data.age
+                         << ", "
+                         << node->data.major
+                         << ")" << std::endl;
+       }
+}

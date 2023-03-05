@@ -1,37 +1,80 @@
 #include <iostream>
+#include <string>
 #include "Tree.h"
 
 Tree oak;
+struct data{
+        std::string name;
+        int age;
+        std::string major;
+}student;
+
+void readInput(){
+        std::cin.ignore();
+        std::cout << "Nombre: ";
+        std::getline(std::cin, student.name);
+
+        std::cout << "Edad: ";
+        std::cin >> student.age;
+        std::cin.ignore();
+
+        std::cout << "Carrera: ";
+        std::getline(std::cin, student.major);
+
+}
+
+char choose(){
+        char option;
+        std::cout << "1. Insertar\n"
+                << "2. Imprimir inorden\n"
+                << "3. Imprimir posorden\n"
+                << "4. Imprimir preorden\n"
+                << "5. Eliminar nodo\n"
+                << "6. Buscar\n"
+                << "7. Leer archivo\n"
+                << "8. Guardar archivo\n"
+                << "9. Salir\n"
+                << ": ";
+        std::cin >> option;
+        return option;
+}
 
 void menu(){
-        char option = ' ';
+        char option;
+        std::cout << "Árbol ABB" << std::endl;
         do{
-                // Leer árbol
-                // imprimir árbol
-                // // inorden, posorden, preorden
-                // Guardar árbol
-                // Eliminar nodo
-                //
+                option = choose();
                 switch(option){
                         case '1':{
-
+                                readInput();
+                                oak.insert(Student(student.name,
+                                                   student.age,
+                                                   student.major));
+                                break;
                         }
+                        case '2':{
+                                oak.traverseInOrder();
+                                break;
+                        }
+
+                        case '3':{
+                                oak.traversePostOrder();
+                                break;
+                        }
+
+                        case '4':{
+                                oak.traversePreOrder();
+                                break;
+                        }
+
                         default:
-                                std::cout << "Incorrecto" << std::endl;
+                                std::cout << "Opción incorrecta" << std::endl;
                 }
 
-        }while(option != 's');
-        std::cout << "Adiós" << std::endl;
+        }while(option != 's' && option != '9' && option != 'S');
 }
 
 int main(){
-
-        oak.insert(Student("Alice", 21, "Computer Science"));
-        oak.insert(Student("Bob", 22, "Mathematics"));
-        oak.insert(Student("Charlie", 20, "English"));
-        oak.insert(Student("David", 23, "Biology"));
-        oak.insert(Student("Emily", 19, "Chemistry"));
-
-        oak.traverseInOrder();
+        menu();
         return 0;
 }

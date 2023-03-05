@@ -15,10 +15,21 @@ public:
     }
 
     void insert(Student);
-    void traverseInOrder(TreeNode* node);
+    void traverseInOrder(TreeNode*);
     // Utilizada para la primer iteración
-    void traverseInOrder() {
-        traverseInOrder(root);
+    void traverseInOrder(){
+            traverseInOrder(root);
+    }
+
+    void traversePreOrder(TreeNode*);
+    void traversePreOrder(){
+            traversePreOrder(root);
+    }
+
+    void traversePostOrder(TreeNode*);
+    void traversePostOrder(){
+            traversePostOrder(root);
+
     }
 };
 
