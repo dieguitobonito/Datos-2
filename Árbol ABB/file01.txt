@@ -1,3 +1,4 @@
-Diego Martín,21,ingenieria
-jose de jesus martinez alcaraz,75,soldado
-maria jose,56,trunca
+Diego,28,software
+Diego,28,Veterinaria
+Naomi,18,Veterinaria
+Jose,18,Chef

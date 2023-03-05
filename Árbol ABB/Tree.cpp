@@ -24,6 +24,7 @@ void Tree::insert(Student data){
             }
         }
     }
+    std::cout << "\nAlumno agregado" << std::endl;
 }
 
 void Tree::traverseInOrder(TreeNode* node){
@@ -65,8 +66,18 @@ void Tree::traversePostOrder(TreeNode* node){
        }
 }
 
-void Tree::search(){
-        std::cout << "Impleméntame" << std::endl;
+void Tree::search(TreeNode* root, std::string name){
+        if(root == nullptr){
+                return;
+        }
+        search(root->left, name);
+        if(root->data.name == name){
+                std::cout << "Alumno encontrado:" << std::endl;
+                std::cout << root->data.name
+                        << ", " << root->data.age
+                        << ", " << root->data.major << std::endl;
+        }
+        search(root->right, name);
 }
 
 TreeNode* Tree::readFile(const std::string filename,
@@ -144,10 +155,24 @@ void Tree::saveFileHelper(TreeNode* node, std::ofstream& file,
         saveFileHelper(node->right, file, fDel, rDel);
 }
 
-void Tree::deleteAll(){
-        std::cout << "Impleméntame" << std::endl;
+void Tree::deleteAll(TreeNode* root){
+        if(root == nullptr){
+                return;
+        }
+
+        deleteAll(root->left);
+        deleteAll(root->right);
+
+        delete root;
+        root = nullptr;
 }
 
 bool Tree::isTreeEmpty(TreeNode* root){
         return (root == nullptr);
+}
+
+// Peek devuelve el último caracter sin quitarlo
+bool Tree::isFileEmpty(const std::string& filename){
+    std::ifstream file(filename);
+    return file.peek() == std::ifstream::traits_type::eof();
 }

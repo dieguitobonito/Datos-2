@@ -3,7 +3,7 @@
 #include <fstream>
 #include "Tree.h"
 
-Tree* oak;
+Tree oak;
 bool changes;
 struct data{
         std::string name;
@@ -70,38 +70,39 @@ void menu(){
                         // Insertar
                         case '1':{
                                 readInput();
-                                oak->insert(Student(student.name,
+                                oak.insert(Student(student.name,
                                                    student.age,
                                                    student.major));
                                 break;
                         }
                         // Inorden
                         case '2':{
-                                if(oak->isTreeEmpty(oak->root))
+                                if(oak.isTreeEmpty(oak.root))
                                         std::cout << "No existe" << std::endl;
                                 else{
+                                        std::cout << &oak.root << std::endl;
                                         shoutItOut();
-                                        oak->traverseInOrder();
+                                        oak.traverseInOrder();
                                 }
                                 break;
                         }
                         // Posorden
                         case '3':{
-                                if(oak->isTreeEmpty(oak->root))
+                                if(oak.isTreeEmpty(oak.root))
                                         std::cout << "No existe" << std::endl;
                                 else{
                                         shoutItOut();
-                                        oak->traversePostOrder();
+                                        oak.traversePostOrder();
                                 }
                                 break;
                         }
                         // Preorden
                         case '4':{
-                                if(oak->isTreeEmpty(oak->root))
+                                if(oak.isTreeEmpty(oak.root))
                                         std::cout << "No existe" << std::endl;
                                 else{
                                         shoutItOut();
-                                        oak->traversePreOrder();
+                                        oak.traversePreOrder();
                                 }
                                 break;
                         }
@@ -112,12 +113,17 @@ void menu(){
                         }
                         // Eliminar árbol
                         case '6':{
-                                oak->deleteAll();
+                                oak.deleteAll(oak.root);
                                 break;
                         }
                         // Buscar
                         case '7':{
-                                oak->search();
+                                std::cin.ignore();
+                                std::string lookfor;
+                                std::cout << "Nombre a buscar: ";
+                                getline(std::cin, lookfor);
+                                std::cout << lookfor << std::endl;
+                                oak.search(oak.root, lookfor);
                                 break;
                         }
                         // Leer archivo
@@ -125,15 +131,43 @@ void menu(){
                                 // Haz que elimine lo que está
                                 // anteriormente para así no gastar
                                 // memoria
-                                oak->root = oak->readFile(filename, fDel, rDel);
+                                oak.root = oak.readFile(filename, fDel, rDel);
                                 break;
                         }
                         // Guardar archivo
                         case '9':{
-                                changes = oak->saveFile(oak->root,
-                                                       filename,
-                                                       fDel,
-                                                       rDel);
+                                char subOption;
+                                if(!oak.isFileEmpty(filename)){
+                                        std::cout << "El archivo tiene "
+                                                << "contenido, "
+                                                << "¿sobreescribir?\n"
+                                                << "1. Sí 2. No: ";
+                                        std::cin >> subOption;
+                                        switch(subOption){
+                                            case '1':{
+                                                    changes = oak.saveFile(oak.root,
+                                                                           filename,
+                                                                           fDel,
+                                                                           rDel);
+                                                    break;
+                                            }
+                                            case '2':{
+                                                    std::cout << "Saliendo"
+                                                              << std::endl;
+                                                    break;
+                                            }
+                                            default:
+                                                    std::cout << "Inválido,"
+                                                              << "saliendo"
+                                                              << std::endl;
+                                            }
+
+                                }else{
+                                        changes = oak.saveFile(oak.root,
+                                                               filename,
+                                                               fDel,
+                                                               rDel);
+                                }
                                 break;
                         }
                         case 'S':{

@@ -33,7 +33,7 @@ public:
 
     bool isTreeEmpty(TreeNode*);
 
-    void search();
+    void search(TreeNode*, std::string);
 
     // Leer el archivo de texto
     TreeNode* readFile(const std::string, const char, const char);
@@ -43,7 +43,10 @@ public:
     bool saveFile(TreeNode*, const std::string&, const char, const char);
     void saveFileHelper(TreeNode*, std::ofstream&, const char, const char);
 
-    void deleteAll();
+    // Utilizado por saveFile()
+    bool isFileEmpty(const std::string&);
+
+    void deleteAll(TreeNode* root);
 };
 
 #endif // TREE_H
