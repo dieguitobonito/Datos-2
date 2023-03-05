@@ -65,10 +65,6 @@ void Tree::traversePostOrder(TreeNode* node){
        }
 }
 
-void Tree::deleteNode(TreeNode* root, std::string name){
-        std::cout << "Hola" << std::endl;
-}
-
 void Tree::search(){
         std::cout << "Impleméntame" << std::endl;
 }
@@ -76,17 +72,18 @@ void Tree::search(){
 TreeNode* Tree::readFile(const std::string filename,
                          const char fDel, const char rDel){
 
-        ifstream file
+        std::ifstream file;
         file.open(filename);
 
         TreeNode* root = nullptr;
 
         readFileHelper(root, file, fDel, rDel);
+        std::cout << "Hola" << std::endl;
 
         return root;
 }
 
-void readFileHelper(TreeNode*& node,
+void Tree::readFileHelper(TreeNode*& node,
                     std::ifstream& file,
                     const char fDel,
                     const char rDel){
@@ -109,10 +106,12 @@ void readFileHelper(TreeNode*& node,
                 // Leemos de la misma manera en que leemos
                 // el archivo
                 node = new TreeNode(Student(name, age, major));
+                std::cout << "Haciendo magia" << std::endl;
                 readFileHelper(node->left, file, fDel, rDel);
                 readFileHelper(node->right, file, fDel, rDel);
         }
 }
+
 bool Tree::saveFile(TreeNode* root, const std::string& filename,
                     const char fDel, const char rDel){
 
@@ -149,3 +148,6 @@ void Tree::deleteAll(){
         std::cout << "Impleméntame" << std::endl;
 }
 
+bool Tree::isTreeEmpty(TreeNode* root){
+        return (root == nullptr);
+}

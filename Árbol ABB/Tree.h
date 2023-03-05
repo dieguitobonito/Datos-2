@@ -31,7 +31,8 @@ public:
             traversePostOrder(root);
     }
 
-    void deleteNode(TreeNode*, std::string);
+    bool isTreeEmpty(TreeNode*);
+
     void search();
 
     // Leer el archivo de texto

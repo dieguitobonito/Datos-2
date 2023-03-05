@@ -3,7 +3,7 @@
 #include <fstream>
 #include "Tree.h"
 
-Tree oak;
+Tree* oak;
 bool changes;
 struct data{
         std::string name;
@@ -16,7 +16,7 @@ const std::string filename = "file01.txt";
 
 // Delimitador de campo y de registro
 char fDel = ',';
-char rDel = '|';
+char rDel = '\n';
 
 void readInput(){
         std::cin.ignore();
@@ -56,6 +56,11 @@ char choose(){
         return option;
 }
 
+// Para imprimir los datos, nada más
+void shoutItOut(){
+        std::cout << "Nombre (edad, carrera)\n" << std::endl;
+}
+
 void menu(){
         char option;
         std::cout << "Árbol ABB" << std::endl;
@@ -65,52 +70,67 @@ void menu(){
                         // Insertar
                         case '1':{
                                 readInput();
-                                oak.insert(Student(student.name,
+                                oak->insert(Student(student.name,
                                                    student.age,
                                                    student.major));
                                 break;
                         }
                         // Inorden
                         case '2':{
-                                oak.traverseInOrder();
+                                if(oak->isTreeEmpty(oak->root))
+                                        std::cout << "No existe" << std::endl;
+                                else{
+                                        shoutItOut();
+                                        oak->traverseInOrder();
+                                }
                                 break;
                         }
                         // Posorden
                         case '3':{
-                                oak.traversePostOrder();
+                                if(oak->isTreeEmpty(oak->root))
+                                        std::cout << "No existe" << std::endl;
+                                else{
+                                        shoutItOut();
+                                        oak->traversePostOrder();
+                                }
                                 break;
                         }
                         // Preorden
                         case '4':{
-                                oak.traversePreOrder();
+                                if(oak->isTreeEmpty(oak->root))
+                                        std::cout << "No existe" << std::endl;
+                                else{
+                                        shoutItOut();
+                                        oak->traversePreOrder();
+                                }
                                 break;
                         }
                         // Eliminar nodo
                         case '5':{
-                                std::string buscar;
-                                std::getline(std::cin, buscar);
-                                oak.deleteNode(oak.root,
-                                               buscar);
+                                std::cout << "Impleméntame" << std::endl;
                                 break;
                         }
                         // Eliminar árbol
                         case '6':{
-                                oak.deleteAll();
+                                oak->deleteAll();
                                 break;
                         }
                         // Buscar
                         case '7':{
-                                oak.search();
+                                oak->search();
                                 break;
                         }
                         // Leer archivo
                         case '8':{
-                                oak.readFile(int);
+                                // Haz que elimine lo que está
+                                // anteriormente para así no gastar
+                                // memoria
+                                oak->root = oak->readFile(filename, fDel, rDel);
                                 break;
                         }
                         // Guardar archivo
                         case '9':{
-                                changes = oak.saveFile(oak.root,
+                                changes = oak->saveFile(oak->root,
                                                        filename,
                                                        fDel,
                                                        rDel);
