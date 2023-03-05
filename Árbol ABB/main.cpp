@@ -105,7 +105,7 @@ void menu(){
                         }
                         // Leer archivo
                         case '8':{
-                                oak.readFile();
+                                oak.readFile(int);
                                 break;
                         }
                         // Guardar archivo
