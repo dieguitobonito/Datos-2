@@ -89,7 +89,8 @@ TreeNode* Tree::readFile(const std::string filename,
         TreeNode* root = nullptr;
 
         readFileHelper(root, file, fDel, rDel);
-        std::cout << "Hola" << std::endl;
+
+        std::cout << "Archivo leído" << std::endl;
 
         return root;
 }
@@ -117,7 +118,6 @@ void Tree::readFileHelper(TreeNode*& node,
                 // Leemos de la misma manera en que leemos
                 // el archivo
                 node = new TreeNode(Student(name, age, major));
-                std::cout << "Haciendo magia" << std::endl;
                 readFileHelper(node->left, file, fDel, rDel);
                 readFileHelper(node->right, file, fDel, rDel);
         }
@@ -175,4 +175,38 @@ bool Tree::isTreeEmpty(TreeNode* root){
 bool Tree::isFileEmpty(const std::string& filename){
     std::ifstream file(filename);
     return file.peek() == std::ifstream::traits_type::eof();
+}
+
+void Tree::deleteNode(TreeNode* root, std::string& name){
+    if (root == nullptr){
+        return;
+    }
+
+    if(root->data.name == name){
+        if(root->left == nullptr && root->right == nullptr){
+            delete root;
+            root = nullptr;
+        }else if(root->left == nullptr){
+            TreeNode* temp = root;
+            root = root->right;
+            temp->right = nullptr;
+            delete temp;
+        }else if(root->right == nullptr){
+            TreeNode* temp = root;
+            root = root->left;
+            temp->left = nullptr;
+            delete temp;
+        }else{
+            TreeNode* temp = root->right;
+            while(temp->left != nullptr){
+                temp = temp->left;
+            }
+            root->data.name = temp->data.name;
+            deleteNode(root->right, temp->data.name);
+        }
+    }else if(name < root->data.name){
+        deleteNode(root->left, name);
+    }else{
+        deleteNode(root->right, name);
+    }
 }

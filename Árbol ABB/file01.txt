@@ -1,4 +1,4 @@
-Diego,28,software
-Diego,28,Veterinaria
+Diego,21,Ingeniería informática
+Jesus,18,Chef
+Maria,18,Contaduría
 Naomi,18,Veterinaria
-Jose,18,Chef

@@ -47,6 +47,8 @@ public:
     bool isFileEmpty(const std::string&);
 
     void deleteAll(TreeNode* root);
+
+    void deleteNode(TreeNode*, std::string&);
 };
 
 #endif // TREE_H

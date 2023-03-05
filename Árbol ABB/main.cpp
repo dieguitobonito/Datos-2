@@ -41,7 +41,7 @@ char choose(){
         std::cout << "\n1. Insertar\n"
                 << "2. Imprimir inorden\n"
                 << "3. Imprimir posorden\n"
-                << "4. Imprimir preorden\n"
+                << "4. Imprimir preorden (recomendado)\n"
                 << "5. Eliminar nodo\n"
                 << "6. Eliminar árbol\n"
                 << "7. Buscar\n"
@@ -108,12 +108,17 @@ void menu(){
                         }
                         // Eliminar nodo
                         case '5':{
-                                std::cout << "Impleméntame" << std::endl;
+                                std::string lookfor;
+                                std::cin.ignore();
+                                std::cout << "Nombre a eliminar: ";
+                                getline(std::cin, lookfor);
+                                oak.deleteNode(oak.root, lookfor);
                                 break;
                         }
                         // Eliminar árbol
                         case '6':{
                                 oak.deleteAll(oak.root);
+                                oak.root = nullptr;
                                 break;
                         }
                         // Buscar
@@ -122,7 +127,6 @@ void menu(){
                                 std::string lookfor;
                                 std::cout << "Nombre a buscar: ";
                                 getline(std::cin, lookfor);
-                                std::cout << lookfor << std::endl;
                                 oak.search(oak.root, lookfor);
                                 break;
                         }
