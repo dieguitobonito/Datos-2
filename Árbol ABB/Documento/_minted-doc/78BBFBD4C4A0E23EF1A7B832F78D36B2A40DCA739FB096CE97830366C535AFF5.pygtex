@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{TreeNode}\PYG{o}{*}\PYG{+w}{ }\PYG{n+nf}{Tree::readFile}\PYG{p}{(}\PYG{k}{const}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{n}{filename}\PYG{p}{,}
+\PYG{+w}{                         }\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{fDel}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{rDel}\PYG{p}{)\PYGZob{}}
+
+\PYG{+w}{        }\PYG{n}{std}\PYG{o}{::}\PYG{n}{ifstream}\PYG{+w}{ }\PYG{n}{file}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{file}\PYG{p}{.}\PYG{n}{open}\PYG{p}{(}\PYG{n}{filename}\PYG{p}{);}
+
+\PYG{+w}{        }\PYG{n}{TreeNode}\PYG{o}{*}\PYG{+w}{ }\PYG{n}{root}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{nullptr}\PYG{p}{;}
+
+\PYG{+w}{        }\PYG{n}{readFileHelper}\PYG{p}{(}\PYG{n}{root}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{file}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{fDel}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rDel}\PYG{p}{);}
+
+\PYG{+w}{        }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Archivo leído\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+
+\PYG{+w}{        }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{root}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

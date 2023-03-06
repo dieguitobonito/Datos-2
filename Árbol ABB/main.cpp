@@ -80,7 +80,6 @@ void menu(){
                                 if(oak.isTreeEmpty(oak.root))
                                         std::cout << "No existe" << std::endl;
                                 else{
-                                        std::cout << &oak.root << std::endl;
                                         shoutItOut();
                                         oak.traverseInOrder();
                                 }

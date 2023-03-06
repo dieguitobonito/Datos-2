@@ -1,0 +1,125 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{        }\PYG{k}{do}\PYG{p}{\PYGZob{}}
+\PYG{+w}{                }\PYG{n}{option}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{choose}\PYG{p}{();}
+\PYG{+w}{                }\PYG{k}{switch}\PYG{p}{(}\PYG{n}{option}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{                        }\PYG{c+c1}{// Insertar}
+\PYG{+w}{                        }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{:\PYGZob{}}
+\PYG{+w}{                                }\PYG{n}{readInput}\PYG{p}{();}
+\PYG{+w}{                                }\PYG{n}{oak}\PYG{p}{.}\PYG{n}{insert}\PYG{p}{(}\PYG{n}{Student}\PYG{p}{(}\PYG{n}{student}\PYG{p}{.}\PYG{n}{name}\PYG{p}{,}
+\PYG{+w}{                                                   }\PYG{n}{student}\PYG{p}{.}\PYG{n}{age}\PYG{p}{,}
+\PYG{+w}{                                                   }\PYG{n}{student}\PYG{p}{.}\PYG{n}{major}\PYG{p}{));}
+\PYG{+w}{                                }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{                        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                        }\PYG{c+c1}{// Inorden}
+\PYG{+w}{                        }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}2\PYGZsq{}}\PYG{p}{:\PYGZob{}}
+\PYG{+w}{                                }\PYG{k}{if}\PYG{p}{(}\PYG{n}{oak}\PYG{p}{.}\PYG{n}{isTreeEmpty}\PYG{p}{(}\PYG{n}{oak}\PYG{p}{.}\PYG{n}{root}\PYG{p}{))}
+\PYG{+w}{                                        }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}No existe\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+\PYG{+w}{                                }\PYG{k}{else}\PYG{p}{\PYGZob{}}
+\PYG{+w}{                                        }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{n}{oak}\PYG{p}{.}\PYG{n}{root}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+\PYG{+w}{                                        }\PYG{n}{shoutItOut}\PYG{p}{();}
+\PYG{+w}{                                        }\PYG{n}{oak}\PYG{p}{.}\PYG{n}{traverseInOrder}\PYG{p}{();}
+\PYG{+w}{                                }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                                }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{                        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                        }\PYG{c+c1}{// Posorden}
+\PYG{+w}{                        }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}3\PYGZsq{}}\PYG{p}{:\PYGZob{}}
+\PYG{+w}{                                }\PYG{k}{if}\PYG{p}{(}\PYG{n}{oak}\PYG{p}{.}\PYG{n}{isTreeEmpty}\PYG{p}{(}\PYG{n}{oak}\PYG{p}{.}\PYG{n}{root}\PYG{p}{))}
+\PYG{+w}{                                        }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}No existe\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+\PYG{+w}{                                }\PYG{k}{else}\PYG{p}{\PYGZob{}}
+\PYG{+w}{                                        }\PYG{n}{shoutItOut}\PYG{p}{();}
+\PYG{+w}{                                        }\PYG{n}{oak}\PYG{p}{.}\PYG{n}{traversePostOrder}\PYG{p}{();}
+\PYG{+w}{                                }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                                }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{                        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                        }\PYG{c+c1}{// Preorden}
+\PYG{+w}{                        }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}4\PYGZsq{}}\PYG{p}{:\PYGZob{}}
+\PYG{+w}{                                }\PYG{k}{if}\PYG{p}{(}\PYG{n}{oak}\PYG{p}{.}\PYG{n}{isTreeEmpty}\PYG{p}{(}\PYG{n}{oak}\PYG{p}{.}\PYG{n}{root}\PYG{p}{))}
+\PYG{+w}{                                        }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}No existe\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+\PYG{+w}{                                }\PYG{k}{else}\PYG{p}{\PYGZob{}}
+\PYG{+w}{                                        }\PYG{n}{shoutItOut}\PYG{p}{();}
+\PYG{+w}{                                        }\PYG{n}{oak}\PYG{p}{.}\PYG{n}{traversePreOrder}\PYG{p}{();}
+\PYG{+w}{                                }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                                }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{                        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                        }\PYG{c+c1}{// Eliminar nodo}
+\PYG{+w}{                        }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}5\PYGZsq{}}\PYG{p}{:\PYGZob{}}
+\PYG{+w}{                                }\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{n}{lookfor}\PYG{p}{;}
+\PYG{+w}{                                }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cin}\PYG{p}{.}\PYG{n}{ignore}\PYG{p}{();}
+\PYG{+w}{                                }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Nombre a eliminar: \PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{                                }\PYG{n}{getline}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{cin}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{lookfor}\PYG{p}{);}
+\PYG{+w}{                                }\PYG{n}{oak}\PYG{p}{.}\PYG{n}{deleteNode}\PYG{p}{(}\PYG{n}{oak}\PYG{p}{.}\PYG{n}{root}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{lookfor}\PYG{p}{);}
+\PYG{+w}{                                }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{                        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                        }\PYG{c+c1}{// Eliminar árbol}
+\PYG{+w}{                        }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}6\PYGZsq{}}\PYG{p}{:\PYGZob{}}
+\PYG{+w}{                                }\PYG{n}{oak}\PYG{p}{.}\PYG{n}{deleteAll}\PYG{p}{(}\PYG{n}{oak}\PYG{p}{.}\PYG{n}{root}\PYG{p}{);}
+\PYG{+w}{                                }\PYG{n}{oak}\PYG{p}{.}\PYG{n}{root}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k}{nullptr}\PYG{p}{;}
+\PYG{+w}{                                }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{                        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                        }\PYG{c+c1}{// Buscar}
+\PYG{+w}{                        }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}7\PYGZsq{}}\PYG{p}{:\PYGZob{}}
+\PYG{+w}{                                }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cin}\PYG{p}{.}\PYG{n}{ignore}\PYG{p}{();}
+\PYG{+w}{                                }\PYG{n}{std}\PYG{o}{::}\PYG{n}{string}\PYG{+w}{ }\PYG{n}{lookfor}\PYG{p}{;}
+\PYG{+w}{                                }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Nombre a buscar: \PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{                                }\PYG{n}{getline}\PYG{p}{(}\PYG{n}{std}\PYG{o}{::}\PYG{n}{cin}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{lookfor}\PYG{p}{);}
+\PYG{+w}{                                }\PYG{n}{oak}\PYG{p}{.}\PYG{n}{search}\PYG{p}{(}\PYG{n}{oak}\PYG{p}{.}\PYG{n}{root}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{lookfor}\PYG{p}{);}
+\PYG{+w}{                                }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{                        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                        }\PYG{c+c1}{// Leer archivo}
+\PYG{+w}{                        }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}8\PYGZsq{}}\PYG{p}{:\PYGZob{}}
+\PYG{+w}{                                }\PYG{c+c1}{// Haz que elimine lo que está}
+\PYG{+w}{                                }\PYG{c+c1}{// anteriormente para así no gastar}
+\PYG{+w}{                                }\PYG{c+c1}{// memoria}
+\PYG{+w}{                                }\PYG{n}{oak}\PYG{p}{.}\PYG{n}{root}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{oak}\PYG{p}{.}\PYG{n}{readFile}\PYG{p}{(}\PYG{n}{filename}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{fDel}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rDel}\PYG{p}{);}
+\PYG{+w}{                                }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{                        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                        }\PYG{c+c1}{// Guardar archivo}
+\PYG{+w}{                        }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}9\PYGZsq{}}\PYG{p}{:\PYGZob{}}
+\PYG{+w}{                                }\PYG{k+kt}{char}\PYG{+w}{ }\PYG{n}{subOption}\PYG{p}{;}
+\PYG{+w}{                                }\PYG{k}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n}{oak}\PYG{p}{.}\PYG{n}{isFileEmpty}\PYG{p}{(}\PYG{n}{filename}\PYG{p}{))\PYGZob{}}
+\PYG{+w}{                                        }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}El archivo tiene \PYGZdq{}}
+\PYG{+w}{                                                }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}contenido, \PYGZdq{}}
+\PYG{+w}{                                                }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}¿sobreescribir?}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}
+\PYG{+w}{                                                }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}1. Sí 2. No: \PYGZdq{}}\PYG{p}{;}
+\PYG{+w}{                                        }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cin}\PYG{+w}{ }\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{+w}{ }\PYG{n}{subOption}\PYG{p}{;}
+\PYG{+w}{                                        }\PYG{k}{switch}\PYG{p}{(}\PYG{n}{subOption}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{                                            }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}1\PYGZsq{}}\PYG{p}{:\PYGZob{}}
+\PYG{+w}{                                                    }\PYG{n}{changes}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{oak}\PYG{p}{.}\PYG{n}{saveFile}\PYG{p}{(}\PYG{n}{oak}\PYG{p}{.}\PYG{n}{root}\PYG{p}{,}
+\PYG{+w}{                                                                           }\PYG{n}{filename}\PYG{p}{,}
+\PYG{+w}{                                                                           }\PYG{n}{fDel}\PYG{p}{,}
+\PYG{+w}{                                                                           }\PYG{n}{rDel}\PYG{p}{);}
+\PYG{+w}{                                                    }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{                                            }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                                            }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}2\PYGZsq{}}\PYG{p}{:\PYGZob{}}
+\PYG{+w}{                                                    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Saliendo\PYGZdq{}}
+\PYG{+w}{                                                              }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+\PYG{+w}{                                                    }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{                                            }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                                            }\PYG{k}{default}\PYG{o}{:}
+\PYG{+w}{                                                    }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Inválido,\PYGZdq{}}
+\PYG{+w}{                                                              }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}saliendo\PYGZdq{}}
+\PYG{+w}{                                                              }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+\PYG{+w}{                                            }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{                                }\PYG{p}{\PYGZcb{}}\PYG{k}{else}\PYG{p}{\PYGZob{}}
+\PYG{+w}{                                        }\PYG{n}{changes}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{oak}\PYG{p}{.}\PYG{n}{saveFile}\PYG{p}{(}\PYG{n}{oak}\PYG{p}{.}\PYG{n}{root}\PYG{p}{,}
+\PYG{+w}{                                                               }\PYG{n}{filename}\PYG{p}{,}
+\PYG{+w}{                                                               }\PYG{n}{fDel}\PYG{p}{,}
+\PYG{+w}{                                                               }\PYG{n}{rDel}\PYG{p}{);}
+\PYG{+w}{                                }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                                }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{                        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                        }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}S\PYGZsq{}}\PYG{p}{:\PYGZob{}}
+\PYG{+w}{                                }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Adiós\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+\PYG{+w}{                                }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{                        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                        }\PYG{k}{case}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}s\PYGZsq{}}\PYG{p}{:\PYGZob{}}
+\PYG{+w}{                                }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Adiós\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+\PYG{+w}{                                }\PYG{k}{break}\PYG{p}{;}
+\PYG{+w}{                        }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                        }\PYG{k}{default}\PYG{o}{:}
+\PYG{+w}{                                }\PYG{n}{std}\PYG{o}{::}\PYG{n}{cout}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}Opción incorrecta\PYGZdq{}}\PYG{+w}{ }\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{+w}{ }\PYG{n}{std}\PYG{o}{::}\PYG{n}{endl}\PYG{p}{;}
+\PYG{+w}{                }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{        }\PYG{p}{\PYGZcb{}}\PYG{k}{while}\PYG{p}{(}\PYG{n}{option}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}s\PYGZsq{}}\PYG{+w}{ }\PYG{o}{\PYGZam{}\PYGZam{}}\PYG{+w}{ }\PYG{n}{option}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{l+s+sc}{\PYGZsq{}S\PYGZsq{}}\PYG{p}{);}
+\end{Verbatim}

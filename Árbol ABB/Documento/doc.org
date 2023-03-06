@@ -1,0 +1,499 @@
+#+LATEX_HEADER: \usepackage[default]{sourcecodepro}
+#+LATEX_HEADER: \usepackage[T1]{fontenc}
+#+LATEX_HEADER: \usepackage[a4paper, total={6in, 8in}]{geometry}
+
+#+LATEX_HEADER: \usepackage{lipsum}
+#+LATEX_HEADER: \renewcommand{\contentsname}{Contenido}
+
+* Explicación del programa
+El programa incorpora un árbol de búsqueda binaria
+(ABB) en /C++/, haciendo uso de memoria dinámica
+(apuntadores) y de manejo de archivos utilizando delimitadores.
+
+Las operaciones codificadas para el árbol fueron:
+- Insertar
+- Imprimir inorden
+- Imprimir posorden
+- Imprimir preorden
+- Eliminar nodo
+- Eliminar árbol
+- Buscar
+- Leer archivo
+- Guardar archivo
+- Salir
+
+* Cómo se organizo el TDA
+El nodo que contiene el tipo de dato /Student/
+contiene tres atributos:
+- name
+- age
+- major
+Al insertar un nuevo nodo al árbol el programa
+pedirá estos tres datos, añadiéndolos al final
+como un solo tipo de dato (recuerdos de Datos 1).
+
+* Estrategia de almacenamiendo y recuperación de datos
+* Explicación de las funciones
+** Insertar
+#+begin_src cpp
+void Tree::insert(Student data){
+    if(root == nullptr){
+        root = new TreeNode(data);
+    }else{
+        TreeNode* current = root;
+        while(true){
+            if(data.name < current->data.name){
+                if(current->left == nullptr){
+                    current->left = new TreeNode(data);
+                    break;
+                }else{
+                    current = current->left;
+                }
+            }else{
+                if(current->right == nullptr){
+                    current->right = new TreeNode(data);
+                    break;
+                }else{
+                    current = current->right;
+                }
+            }
+        }
+    }
+    std::cout << "\nAlumno agregado" << std::endl;
+}
+#+end_src
+- Recibe el tipo de dato /Student/
+- Devuelve el nodo /root/ si es el primer nodo
+  insertado en el árbol
+- Si no, recorre el árbol por la izquierda
+  comparando el dato /name/ con el nodo /current/
+  hasta asignarlo
+- Si el nombre es "mayor", recorre por la derecha
+  hasta encontrar su lugar
+** Imprimir inorden
+#+begin_src cpp
+void Tree::traverseInOrder(TreeNode* node){
+    if(node != nullptr){
+        traverseInOrder(node->left);
+        std::cout << node->data.name
+                  << " ("
+                  << node->data.age
+                  << ", "
+                  << node->data.major
+                  << ")" << std::endl;
+        traverseInOrder(node->right);
+    }
+}
+#+end_src
+- Mientras el nodo sea distinto de nulo, recorre
+  la parte izquierda
+- Llegando al tope, imprime los datos del nodo visitado
+- Recorre la parte izquierda
+** Imprimir posorden
+#+begin_src cpp
+void Tree::traversePostOrder(TreeNode* node){
+       if(node != nullptr){
+               traversePostOrder(node->left);
+               traversePostOrder(node->right);
+               std::cout << node->data.name
+                         << " ("
+                         << node->data.age
+                         << ", "
+                         << node->data.major
+                         << ")" << std::endl;
+       }
+}
+#+end_src
+- Se mueve a la izquierda
+- Se mueve a la derecha
+- Llegando al tope, imprime el nodo visitado
+** Imprimir preorden
+#+begin_src cpp
+void Tree::traversePreOrder(TreeNode* node){
+    if(node != nullptr){
+            std::cout << node->data.name
+                      << " ("
+                      << node->data.age
+                      << ", "
+                      << node->data.major
+                      << ")" << std::endl;
+            traversePreOrder(node->left);
+            traversePreOrder(node->right);
+    }
+}
+#+end_src
+- Imprime el nodo visitado
+- Se mueve a la izquierda
+- Se mueve a la derecha
+** Eliminar nodo
+#+begin_src cpp
+void Tree::deleteNode(TreeNode* root, std::string& name){
+    if (root == nullptr){
+        return;
+    }
+
+    if(root->data.name == name){
+        if(root->left == nullptr && root->right == nullptr){
+            delete root;
+            root = nullptr;
+        }else if(root->left == nullptr){
+            TreeNode* temp = root;
+            root = root->right;
+            temp->right = nullptr;
+            delete temp;
+        }else if(root->right == nullptr){
+            TreeNode* temp = root;
+            root = root->left;
+            temp->left = nullptr;
+            delete temp;
+        }else{
+            TreeNode* temp = root->right;
+            while(temp->left != nullptr){
+                temp = temp->left;
+            }
+            root->data.name = temp->data.name;
+            deleteNode(root->right, temp->data.name);
+        }
+    }else if(name < root->data.name){
+        deleteNode(root->left, name);
+    }else{
+        deleteNode(root->right, name);
+    }
+}
+#+end_src
+- Busca el nodo a eliminar en el lado izquierdo y
+  derecho del árbol
+- Si el nodo es encontrado con el nombre específico
+  - Verifica si tiene un hijo, dos o ninguno
+    - Si tiene ninguno elimina el nodo
+    - Si tiene uno, el padre del nodo visitado
+      apuntará al hijo del nodo, esté en la
+      izquierda o en la derecha
+    - Si tiene dos, mientras el nodo sea distinto
+      de nulo, se recorre a la izquierda, moviendo
+      los datos a su consiguiente, y eliminando el
+      más a la derecha
+
+** Eliminar árbol
+#+begin_src cpp
+void Tree::deleteAll(TreeNode* root){
+        if(root == nullptr){
+                return;
+        }
+
+        deleteAll(root->left);
+        deleteAll(root->right);
+
+        delete root;
+        root = nullptr;
+}
+#+end_src
+- Si el nodo es nulo, regresa
+- Si no, llama recursivamente al lado izquierdo
+  del nodo
+- Al igual que el derecho
+- Eliminando el nodo visitado
+- Para terminar aterrizándolo
+** Buscar
+#+begin_src cpp
+void Tree::search(TreeNode* root, std::string name){
+        if(root == nullptr){
+                return;
+        }
+        search(root->left, name);
+        if(root->data.name == name){
+                std::cout << "Alumno encontrado:" << std::endl;
+                std::cout << root->data.name
+                        << ", " << root->data.age
+                        << ", " << root->data.major << std::endl;
+        }
+        search(root->right, name);
+}
+#+end_src
+- Si el nodo es nulo, regresa, indicando que no se encontró
+- Si no, busca por la izquierda
+  - Si el nodo actual corresponde al nombre a
+    buscar, lo imprime
+- Si no, busca por la izquierda
+** Leer archivo
+Utiliza dos funciones
+#+begin_src cpp
+TreeNode* Tree::readFile(const std::string filename,
+                         const char fDel, const char rDel){
+
+        std::ifstream file;
+        file.open(filename);
+
+        TreeNode* root = nullptr;
+
+        readFileHelper(root, file, fDel, rDel);
+
+        std::cout << "Archivo leído" << std::endl;
+
+        return root;
+}
+#+end_src
+Que simplemente abre el archivo con los parámetros
+/filename/, crea un nodo raíz y llama a
+/readFileHelper/ con los delimitadores de campo y registro
+
+Cabe aclarar que los delimitadores utilizados son:
+- *,* para campos
+- *Carácter de salto de línea* para registros
+Haciendo que el archivo /file01.txt/ termine de la
+siguiente manera:
+- Diego,21,Ingeniería
+- María,22,Contaduría
+- Naomi,21, Veterinaria
+Continuando con la función /readFileHelper/
+#+begin_src cpp
+void Tree::readFileHelper(TreeNode*& node,
+                    std::ifstream& file,
+                    const char fDel,
+                    const char rDel){
+
+        std::string name;
+        // Necesario para leerlo del archivo,
+        // de ahí lo convertimos a int
+        std::string ageStr;
+        std::string major;
+
+        getline(file, name, fDel);
+        getline(file, ageStr, fDel);
+        getline(file, major, rDel);
+
+        if(name.empty() || ageStr.empty() || major.empty())
+                node = nullptr;
+        else{
+                int age = stoi(ageStr);
+
+                // Leemos de la misma manera en que leemos
+                // el archivo
+                node = new TreeNode(Student(name, age, major));
+                readFileHelper(node->left, file, fDel, rDel);
+                readFileHelper(node->right, file, fDel, rDel);
+        }
+}
+#+end_src
+Se crean 3 variables para retomar los datos del
+archivo
+- name
+- ageStr
+- major
+Siendo todos /string/, a pesar que /age/ debería
+ser /int/, el archivo de texto no lo reconoce como
+entero, por lo tanto, es necesario cambiarlo a su
+dato correspondiente en memoria.
+
+- Verifica si uno de los campos está vacío (por si
+  pasa lo peor), y crea el nodo en vacío.
+- Si no, hace el cambio a /int/ para la variable /age/
+- Crea un nuevo nodo con todos los datos obtenidos
+- Llama a la función del lado izquierdo y derecho
+La forma en la que lee el archivo es de la misma
+manera en la que la impresión preorden, ¡importante
+para poder tener los datos en orden!
+** Guardar archivo
+De la misma manera para leer el archivo, la forma
+que guarda es en dos funciones
+#+begin_src cpp
+bool Tree::saveFile(TreeNode* root, const std::string& filename,
+                    const char fDel, const char rDel){
+
+        std::ofstream file;
+        file.open(filename);
+
+        saveFileHelper(root, file, fDel, rDel);
+
+        file.close();
+        // Para changes, false para saber que no hay
+        // changes, jeje, ¿entiendes?
+        return false;
+}
+#+end_src
+- Crea un archivo con el nombre específicado
+- Llama a
+#+begin_src cpp
+void Tree::saveFileHelper(TreeNode* node, std::ofstream& file,
+                          const char fDel, const char rDel){
+
+        if(node == nullptr){
+                return;
+        }
+
+        // Recorrido preorden PREORDEN
+        // Guarda el nodo
+        // Se va al izquierdo y derecho
+        file << node->data.name << fDel
+                << node->data.age << fDel
+                << node->data.major << rDel;
+
+        saveFileHelper(node->left, file, fDel, rDel);
+        saveFileHelper(node->right, file, fDel, rDel);
+}
+#+end_src
+- Añade cada uno de los datos conforme a los
+  delimitadores de campo y registro mencionados
+- Llama a la función por la derecha y por la izquierda
+** Salir
+Digo, es...intuitivo, ¿no?
+
+#+begin_src cpp
+        do{
+                option = choose();
+                switch(option){
+                        // Insertar
+                        case '1':{
+                                readInput();
+                                oak.insert(Student(student.name,
+                                                   student.age,
+                                                   student.major));
+                                break;
+                        }
+                        // Inorden
+                        case '2':{
+                                if(oak.isTreeEmpty(oak.root))
+                                        std::cout << "No existe" << std::endl;
+                                else{
+                                        std::cout << &oak.root << std::endl;
+                                        shoutItOut();
+                                        oak.traverseInOrder();
+                                }
+                                break;
+                        }
+                        // Posorden
+                        case '3':{
+                                if(oak.isTreeEmpty(oak.root))
+                                        std::cout << "No existe" << std::endl;
+                                else{
+                                        shoutItOut();
+                                        oak.traversePostOrder();
+                                }
+                                break;
+                        }
+                        // Preorden
+                        case '4':{
+                                if(oak.isTreeEmpty(oak.root))
+                                        std::cout << "No existe" << std::endl;
+                                else{
+                                        shoutItOut();
+                                        oak.traversePreOrder();
+                                }
+                                break;
+                        }
+                        // Eliminar nodo
+                        case '5':{
+                                std::string lookfor;
+                                std::cin.ignore();
+                                std::cout << "Nombre a eliminar: ";
+                                getline(std::cin, lookfor);
+                                oak.deleteNode(oak.root, lookfor);
+                                break;
+                        }
+                        // Eliminar árbol
+                        case '6':{
+                                oak.deleteAll(oak.root);
+                                oak.root = nullptr;
+                                break;
+                        }
+                        // Buscar
+                        case '7':{
+                                std::cin.ignore();
+                                std::string lookfor;
+                                std::cout << "Nombre a buscar: ";
+                                getline(std::cin, lookfor);
+                                oak.search(oak.root, lookfor);
+                                break;
+                        }
+                        // Leer archivo
+                        case '8':{
+                                // Haz que elimine lo que está
+                                // anteriormente para así no gastar
+                                // memoria
+                                oak.root = oak.readFile(filename, fDel, rDel);
+                                break;
+                        }
+                        // Guardar archivo
+                        case '9':{
+                                char subOption;
+                                if(!oak.isFileEmpty(filename)){
+                                        std::cout << "El archivo tiene "
+                                                << "contenido, "
+                                                << "¿sobreescribir?\n"
+                                                << "1. Sí 2. No: ";
+                                        std::cin >> subOption;
+                                        switch(subOption){
+                                            case '1':{
+                                                    changes = oak.saveFile(oak.root,
+                                                                           filename,
+                                                                           fDel,
+                                                                           rDel);
+                                                    break;
+                                            }
+                                            case '2':{
+                                                    std::cout << "Saliendo"
+                                                              << std::endl;
+                                                    break;
+                                            }
+                                            default:
+                                                    std::cout << "Inválido,"
+                                                              << "saliendo"
+                                                              << std::endl;
+                                            }
+
+                                }else{
+                                        changes = oak.saveFile(oak.root,
+                                                               filename,
+                                                               fDel,
+                                                               rDel);
+                                }
+                                break;
+                        }
+                        case 'S':{
+                                std::cout << "Adiós" << std::endl;
+                                break;
+                        }
+                        case 's':{
+                                std::cout << "Adiós" << std::endl;
+                                break;
+                        }
+                        default:
+                                std::cout << "Opción incorrecta" << std::endl;
+                }
+
+        }while(option != 's' && option != 'S');
+#+end_src
+
+Tanto código para una función sencilla que no cabe
+en el documento.
+Es el menú en el main, la opción de salida es /s/.
+* Capturas de pantalla
+Programa recién abierto
+[[./principal.png]]
+
+Insertando un dato
+[[./insertando.png]]
+El programa muestra si se modificó el árbol
+
+Imprimiendo los datos
+[[./imprimiendo.png]]
+
+Guardando a archivo
+[[./guardando.png]]
+
+
+Mostranddo el archivo guardado, mostrando los
+campos separados por los delimitadores previamente
+mencionados
+[[./mostrando.png]]
+
+Reabriendo el archivo y cargándolo a memoria
+[[./reabriendo.png]]
+
+Mostrando que sí se guardó
+[[./reimprimiendo.png]]
+
+* Conclusiones
+Me partí el coco intentando entender los árboles,
+no tengo más opinión sobre esto, esperando a los
+grafos con miedo.
